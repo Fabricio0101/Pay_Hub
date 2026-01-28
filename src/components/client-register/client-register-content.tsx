@@ -75,9 +75,9 @@ export const ClientRegisterContent = () => {
 
   return (
     <div className="flex flex-col gap-8 p-4 lg:p-6">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Bem-vindo de volta!</h1>
-        <p className="text-muted-foreground text-lg">
+      <div className="flex flex-col gap-1">
+        <h1 className="text-3xl font-bold tracking-tight">Cadastro de Clientes</h1>
+        <p className="text-muted-foreground text-sm">
           Aqui está uma lista de seus clientes para este mês.
         </p>
       </div>

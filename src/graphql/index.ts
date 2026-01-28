@@ -17,6 +17,7 @@ export * from './queries/products';
 export * from './queries/categories';
 export * from './queries/suppliers';
 export * from './queries/sales';
+export * from './queries/dashboard';
 
 // Generated types and hooks
 export * from './generated/graphql';

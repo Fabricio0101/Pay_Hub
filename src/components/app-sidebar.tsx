@@ -38,7 +38,7 @@ const operacoesNav = [
   },
   {
     title: "Relatórios",
-    url: "/finance",
+    url: "/reports",
     icon: FileText,
   },
 ];
@@ -46,7 +46,7 @@ const operacoesNav = [
 const cadastrosNav = [
   {
     title: "Cadastro de Produtos",
-    url: "/products",
+    url: "/product-register",
     icon: Box,
   },
   {
@@ -56,7 +56,7 @@ const cadastrosNav = [
   },
   {
     title: "Categorias",
-    url: "/buy",
+    url: "/category-register",
     icon: Logs,
   },
 ];

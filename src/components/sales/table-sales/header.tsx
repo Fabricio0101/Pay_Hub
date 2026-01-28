@@ -1,0 +1,77 @@
+"use client";
+
+import { Search, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { SalesFormDrawer } from "../sales-form-drawer";
+import { type DataTableProps } from "./types";
+
+interface HeaderProps {
+  globalFilter: string;
+  onGlobalFilterChange: (value: string) => void;
+  table: any;
+  onAddSale: DataTableProps["onAddSale"];
+  loading?: boolean;
+}
+
+export const TableHeader = ({
+  globalFilter,
+  onGlobalFilterChange,
+  table,
+  onAddSale,
+  loading,
+}: HeaderProps) => {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-1 items-center space-x-2">
+          <div className="relative flex-1 max-w-sm">
+            <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Filtrar vendas..."
+              value={globalFilter ?? ""}
+              onChange={(event) => onGlobalFilterChange(String(event.target.value))}
+              className="pl-9"
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm" className="cursor-pointer">
+                <ChevronDown className="mr-2 size-4" />
+                View
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column: any) => column.getCanHide())
+                .map((column: any) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <SalesFormDrawer onAddSale={onAddSale} loading={loading} />
+        </div>
+      </div>
+    </div>
+  );
+};

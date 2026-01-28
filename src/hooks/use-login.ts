@@ -27,13 +27,14 @@ export const useLogin = () => {
       });
 
       if (result.data?.login) {
-        const { accessToken, userId, email, fullName, role } = result.data.login;
+        const { accessToken, userId, email, fullName, role, organizationId } = result.data.login;
 
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("userId", userId);
         localStorage.setItem("userEmail", email);
         localStorage.setItem("fullName", fullName);
         localStorage.setItem("userRole", role);
+        localStorage.setItem("organizationId", organizationId);
 
         document.cookie = `accessToken=${accessToken}; path=/; max-age=86400; SameSite=Lax`;
 

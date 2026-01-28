@@ -23,20 +23,22 @@ import {
 import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createClientSchema, type CreateClientFormData } from "@/lib/schema/client";
-import { useCollaborators } from "@/hooks/use-collaborators";
-import { type ClientFormValues } from "./table-clients/types";
+import { createProductSchema, type CreateProductFormData } from "@/lib/schema/product";
+import { useCategories } from "@/hooks/use-categories";
+import { useSuppliers } from "@/hooks/use-suppliers";
+import { type ProductFormValues } from "./table-products/types";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DrawerClose } from "@/components/ui/drawer";
 
-interface ClientFormDialogProps {
-  onAddClient: (clientData: ClientFormValues) => void;
+interface ProductFormDialogProps {
+  onAddProduct: (productData: ProductFormValues) => void;
   loading?: boolean;
 }
 
-export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps) => {
+export const ProductFormDialog = ({ onAddProduct, loading }: ProductFormDialogProps) => {
   const [open, setOpen] = useState(false);
   const [organizationId, setOrganizationId] = useState<string>("");
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -45,19 +47,21 @@ export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps
     }
   }, []);
 
-  const { collaborators, loading: loadingCollaborators } = useCollaborators(
-    organizationId || undefined
+  const { categories, loading: loadingCategories } = useCategories(
+    organizationId || ""
+  );
+  const { suppliers, loading: loadingSuppliers } = useSuppliers(
+    organizationId || ""
   );
 
-  const form = useForm<CreateClientFormData>({
-    resolver: zodResolver(createClientSchema),
+  const form = useForm<CreateProductFormData>({
+    resolver: zodResolver(createProductSchema),
     defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
-      birthDate: "",
-      notes: "",
-      collaboratorId: "",
+      name: "",
+      description: "",
+      price: "",
+      productCategoryId: "",
+      supplierId: "",
       organizationId: organizationId,
     },
   });
@@ -69,7 +73,7 @@ export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps
     }
   }, [organizationId, form]);
 
-  const handleSubmit = (data: CreateClientFormData) => {
+  const handleSubmit = (data: CreateProductFormData) => {
     if (!organizationId) {
       form.setError("root", {
         message: "OrganizationId não encontrado. Por favor, faça login novamente.",
@@ -77,28 +81,25 @@ export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps
       return;
     }
 
-    onAddClient({
+    onAddProduct({
       ...data,
       organizationId,
     });
     form.reset({
-      fullName: "",
-      email: "",
-      phone: "",
-      birthDate: "",
-      notes: "",
-      collaboratorId: "",
+      name: "",
+      description: "",
+      price: "",
+      productCategoryId: "",
+      supplierId: "",
       organizationId: organizationId,
     });
     setOpen(false);
   };
 
-  const isMobile = useIsMobile();
-
   const trigger = (
     <Button className="cursor-pointer">
       <Plus className="mr-2 h-4 w-4" />
-      Adicionar Cliente
+      Adicionar Produto
     </Button>
   );
 
@@ -107,20 +108,37 @@ export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps
       open={open}
       onOpenChange={setOpen}
       trigger={trigger}
-      title="Adicionar Novo Cliente"
-      description="Crie um novo cliente. Preencha os campos abaixo e clique em salvar quando terminar."
+      title="Adicionar Novo Produto"
+      description="Crie um novo produto. Preencha os campos abaixo e clique em salvar quando terminar."
       contentClassName="sm:max-w-2xl max-h-[90vh]"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="fullName"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nome Completo</FormLabel>
+                <FormLabel>Nome do Produto</FormLabel>
                 <FormControl>
-                  <Input placeholder="Digite o nome completo" {...field} />
+                  <Input placeholder="Digite o nome do produto" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Descrição</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Digite uma descrição para o produto (opcional)"
+                    className="resize-none"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -129,14 +147,16 @@ export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
-              name="email"
+              name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Preço</FormLabel>
                   <FormControl>
                     <Input
-                      type="email"
-                      placeholder="Digite o endereço de email"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      placeholder="0.00"
                       {...field}
                     />
                   </FormControl>
@@ -146,55 +166,27 @@ export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps
             />
             <FormField
               control={form.control}
-              name="phone"
+              name="productCategoryId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Telefone</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Digite o telefone" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="birthDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Data de Nascimento</FormLabel>
-                  <FormControl>
-                    <Input type="date" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="collaboratorId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Colaborador</FormLabel>
+                  <FormLabel>Categoria</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    disabled={loadingCollaborators}
+                    disabled={loadingCategories}
                   >
                     <FormControl>
                       <SelectTrigger className="cursor-pointer w-full">
-                        <SelectValue placeholder="Selecionar colaborador" />
+                        <SelectValue placeholder="Selecionar categoria" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {collaborators.map((collaborator) => (
+                      {categories.map((category) => (
                         <SelectItem
-                          key={collaborator.id}
-                          value={collaborator.id}
+                          key={category.id}
+                          value={category.id}
                         >
-                          {collaborator.fullName}
+                          {category.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -206,17 +198,31 @@ export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps
           </div>
           <FormField
             control={form.control}
-            name="notes"
+            name="supplierId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Observações</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Digite observações sobre o cliente (opcional)"
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
+                <FormLabel>Fornecedor (Opcional)</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  disabled={loadingSuppliers}
+                >
+                  <FormControl>
+                    <SelectTrigger className="cursor-pointer w-full">
+                      <SelectValue placeholder="Selecionar fornecedor (opcional)" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {suppliers.map((supplier) => (
+                      <SelectItem
+                        key={supplier.id}
+                        value={supplier.id}
+                      >
+                        {supplier.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -248,7 +254,7 @@ export const ClientFormDialog = ({ onAddClient, loading }: ClientFormDialogProps
               </Button>
             )}
             <Button type="submit" className="cursor-pointer" disabled={loading}>
-              {loading ? "Salvando..." : "Salvar Cliente"}
+              {loading ? "Salvando..." : "Salvar Produto"}
             </Button>
           </div>
         </form>

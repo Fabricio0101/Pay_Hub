@@ -17,13 +17,7 @@ const config: CodegenConfig = {
         withHooks: true,
         withResultType: true,
         withMutationFn: true,
-        apolloClientVersion: 4,
-        addDocBlocks: true,
-        skipTypename: false,
-        reactApolloVersion: 4,
-        reactApolloImportFrom: '@apollo/client/react',
-        withSuspenseQuery: false,
-        withSuspenseQueryOptions: false,
+        apolloClientVersion: 3,
       }
     }
   }

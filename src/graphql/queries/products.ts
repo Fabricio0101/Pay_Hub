@@ -15,15 +15,39 @@ export const GET_PRODUCTS = gql`
       supplierId
       createdAt
       updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       productCategory {
         id
         name
         description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
       supplier {
         id
         name
         description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
     }
   }
@@ -44,15 +68,39 @@ export const GET_PRODUCT = gql`
       supplierId
       createdAt
       updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       productCategory {
         id
         name
         description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
       supplier {
         id
         name
         description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
     }
   }
