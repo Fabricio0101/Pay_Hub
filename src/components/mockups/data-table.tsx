@@ -89,7 +89,7 @@ export const DataTable = ({
 
     // Obter tipos únicos dos mockups
     const uniqueTypes = useMemo(() => {
-        const types = new Set(mockups.map((m) => m.type))
+        const types = new Set(mockups.map((m) => m.type).filter((t): t is string => t != null))
         return Array.from(types)
     }, [mockups])
 

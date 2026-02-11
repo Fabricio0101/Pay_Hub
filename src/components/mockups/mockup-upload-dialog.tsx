@@ -33,7 +33,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { cn } from "@/lib/utils"
-import { type UploadGalleryImageInput } from "@/graphql/generated/graphql"
+import { type UploadGalleryImageInput } from "@/components/mockups/table-mockups/types"
 
 const mockupFormSchema = z.object({
     name: z.string().min(1, {

@@ -20,10 +20,23 @@ export const GET_CLIENTS = gql`
         id
         fullName
         email
+        phone
+        role
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
       organization {
         id
         name
+        createdAt
+        updatedAt
       }
     }
   }
@@ -50,10 +63,22 @@ export const GET_CLIENT = gql`
         fullName
         email
         phone
+        role
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
       organization {
         id
         name
+        createdAt
+        updatedAt
       }
     }
   }

@@ -19,6 +19,12 @@ export const GET_COLLABORATORS = gql`
       organizationId
       createdAt
       updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -42,6 +48,12 @@ export const GET_COLLABORATOR = gql`
       organizationId
       createdAt
       updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       clients {
         id
         email
@@ -49,6 +61,32 @@ export const GET_COLLABORATOR = gql`
         phone
         birthDate
         notes
+        collaboratorId
+        organizationId
+        createdAt
+        updatedAt
+        collaborator {
+          id
+          fullName
+          email
+          phone
+          role
+          organizationId
+          createdAt
+          updatedAt
+          organization {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
     }
   }

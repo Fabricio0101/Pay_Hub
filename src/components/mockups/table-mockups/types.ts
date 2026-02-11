@@ -1,6 +1,36 @@
-import { type GalleryImage, type UploadGalleryImageInput, type UpdateGalleryImageInput } from "@/graphql/generated/graphql"
+// Tipos locais para mockups (não existem no GraphQL schema ainda)
+export interface GalleryImage {
+  id: string
+  name: string
+  category: string
+  type?: string | null
+  side?: string | null
+  description?: string | null
+  displayOrder?: number | null
+  imageUrl?: string | null
+  clinicId?: string | null
+  createdAt?: string | null
+  updatedAt?: string | null
+}
 
-export type { GalleryImage, UploadGalleryImageInput, UpdateGalleryImageInput }
+export interface UploadGalleryImageInput {
+  name: string
+  category: string
+  type?: string | null
+  side?: string | null
+  description?: string | null
+  displayOrder?: number | null
+  clinicId?: string
+}
+
+export interface UpdateGalleryImageInput {
+  name?: string
+  category?: string
+  type?: string | null
+  side?: string | null
+  description?: string | null
+  displayOrder?: number | null
+}
 
 export interface DataTableProps {
     mockups: GalleryImage[]

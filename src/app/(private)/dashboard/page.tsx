@@ -12,11 +12,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { useDashboardStats, type DashboardPeriod } from "@/hooks/use-dashboard-stats";
+import { useDashboardStats, DashboardPeriod } from "@/hooks/use-dashboard-stats";
 
 export default function DashboardPage() {
   const [organizationId, setOrganizationId] = useState<string>("");
-  const [period, setPeriod] = useState<DashboardPeriod>("MONTH");
+  const [period, setPeriod] = useState<DashboardPeriod>(DashboardPeriod.Month);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -51,12 +51,12 @@ export default function DashboardPage() {
                   <SelectValue placeholder="Selecione o período" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="TODAY" className="cursor-pointer">Hoje</SelectItem>
-                  <SelectItem value="WEEK" className="cursor-pointer">Esta Semana</SelectItem>
-                  <SelectItem value="MONTH" className="cursor-pointer">Este Mês</SelectItem>
-                  <SelectItem value="QUARTER" className="cursor-pointer">Este Trimestre</SelectItem>
-                  <SelectItem value="YEAR" className="cursor-pointer">Este Ano</SelectItem>
-                  <SelectItem value="ALL_TIME" className="cursor-pointer">Todo o Período</SelectItem>
+                  <SelectItem value={DashboardPeriod.Today} className="cursor-pointer">Hoje</SelectItem>
+                  <SelectItem value={DashboardPeriod.Week} className="cursor-pointer">Esta Semana</SelectItem>
+                  <SelectItem value={DashboardPeriod.Month} className="cursor-pointer">Este Mês</SelectItem>
+                  <SelectItem value={DashboardPeriod.Quarter} className="cursor-pointer">Este Trimestre</SelectItem>
+                  <SelectItem value={DashboardPeriod.Year} className="cursor-pointer">Este Ano</SelectItem>
+                  <SelectItem value={DashboardPeriod.AllTime} className="cursor-pointer">Todo o Período</SelectItem>
                 </SelectContent>
               </Select>
             </div>

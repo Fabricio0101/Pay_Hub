@@ -946,7 +946,7 @@ export type GetCategoriesQueryVariables = Exact<{
 }>;
 
 
-export type GetCategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, products?: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null, price: number }> | null }> };
+export type GetCategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, products?: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null, price: number, organizationId: string, productCategoryId: string, supplierId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, productCategory: { __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } }, supplier: { __typename?: 'Supplier', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } } }> | null }> };
 
 export type GetCategoryQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -954,7 +954,7 @@ export type GetCategoryQueryVariables = Exact<{
 }>;
 
 
-export type GetCategoryQuery = { __typename?: 'Query', category: { __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, products?: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null, price: number, supplier: { __typename?: 'Supplier', id: string, name: string } }> | null } };
+export type GetCategoryQuery = { __typename?: 'Query', category: { __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, products?: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null, price: number, organizationId: string, productCategoryId: string, supplierId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, productCategory: { __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } }, supplier: { __typename?: 'Supplier', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } } }> | null } };
 
 export type GetClientsQueryVariables = Exact<{
   organizationId?: InputMaybe<Scalars['ID']['input']>;
@@ -962,28 +962,28 @@ export type GetClientsQueryVariables = Exact<{
 }>;
 
 
-export type GetClientsQuery = { __typename?: 'Query', clients: Array<{ __typename?: 'Client', id: string, email: string, fullName: string, phone: string, birthDate?: any | null, notes?: string | null, collaboratorId: string, organizationId: string, createdAt: any, updatedAt: any, collaborator?: { __typename?: 'Collaborator', id: string, fullName: string, email: string } | null, organization?: { __typename?: 'Organization', id: string, name: string } | null }> };
+export type GetClientsQuery = { __typename?: 'Query', clients: Array<{ __typename?: 'Client', id: string, email: string, fullName: string, phone: string, birthDate?: any | null, notes?: string | null, collaboratorId: string, organizationId: string, createdAt: any, updatedAt: any, collaborator?: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null, role: UserRole, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null } | null, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null }> };
 
 export type GetClientQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetClientQuery = { __typename?: 'Query', client: { __typename?: 'Client', id: string, email: string, fullName: string, phone: string, birthDate?: any | null, notes?: string | null, collaboratorId: string, organizationId: string, createdAt: any, updatedAt: any, collaborator?: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null } | null, organization?: { __typename?: 'Organization', id: string, name: string } | null } };
+export type GetClientQuery = { __typename?: 'Query', client: { __typename?: 'Client', id: string, email: string, fullName: string, phone: string, birthDate?: any | null, notes?: string | null, collaboratorId: string, organizationId: string, createdAt: any, updatedAt: any, collaborator?: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null, role: UserRole, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null } | null, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null } };
 
 export type GetCollaboratorsQueryVariables = Exact<{
   organizationId?: InputMaybe<Scalars['ID']['input']>;
 }>;
 
 
-export type GetCollaboratorsQuery = { __typename?: 'Query', collaborators: Array<{ __typename?: 'Collaborator', id: string, email: string, fullName: string, role: UserRole, specialty?: string | null, phone?: string | null, address?: string | null, neighborhood?: string | null, zipCode?: string | null, profileImageUrl?: string | null, organizationId: string, createdAt: any, updatedAt: any }> };
+export type GetCollaboratorsQuery = { __typename?: 'Query', collaborators: Array<{ __typename?: 'Collaborator', id: string, email: string, fullName: string, role: UserRole, specialty?: string | null, phone?: string | null, address?: string | null, neighborhood?: string | null, zipCode?: string | null, profileImageUrl?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null }> };
 
 export type GetCollaboratorQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetCollaboratorQuery = { __typename?: 'Query', collaborator: { __typename?: 'Collaborator', id: string, email: string, fullName: string, role: UserRole, specialty?: string | null, phone?: string | null, address?: string | null, neighborhood?: string | null, zipCode?: string | null, profileImageUrl?: string | null, organizationId: string, createdAt: any, updatedAt: any, clients?: Array<{ __typename?: 'Client', id: string, email: string, fullName: string, phone: string, birthDate?: any | null, notes?: string | null }> | null } };
+export type GetCollaboratorQuery = { __typename?: 'Query', collaborator: { __typename?: 'Collaborator', id: string, email: string, fullName: string, role: UserRole, specialty?: string | null, phone?: string | null, address?: string | null, neighborhood?: string | null, zipCode?: string | null, profileImageUrl?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null, clients?: Array<{ __typename?: 'Client', id: string, email: string, fullName: string, phone: string, birthDate?: any | null, notes?: string | null, collaboratorId: string, organizationId: string, createdAt: any, updatedAt: any, collaborator?: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null, role: UserRole, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null } | null, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null }> | null } };
 
 export type GetDashboardStatsQueryVariables = Exact<{
   organizationId: Scalars['ID']['input'];
@@ -1049,7 +1049,7 @@ export type GetSalesQueryVariables = Exact<{
 }>;
 
 
-export type GetSalesQuery = { __typename?: 'Query', sales: Array<{ __typename?: 'Sale', id: string, price: number, quantity: number, total: number, paymentMethod: string, paymentStatus: string, paymentDate: any, clientId: string, collaboratorId: string, productId: string, organizationId: string, createdAt: any, updatedAt: any, client: { __typename?: 'Client', id: string, fullName: string, email: string, phone: string }, collaborator: { __typename?: 'Collaborator', id: string, fullName: string, email: string }, product: { __typename?: 'Product', id: string, name: string, price: number } }> };
+export type GetSalesQuery = { __typename?: 'Query', sales: Array<{ __typename?: 'Sale', id: string, price: number, quantity: number, total: number, paymentMethod: string, paymentStatus: string, paymentDate: any, clientId: string, collaboratorId: string, productId: string, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, client: { __typename?: 'Client', id: string, fullName: string, email: string, phone: string, collaboratorId: string, organizationId: string, createdAt: any, updatedAt: any, collaborator?: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null, role: UserRole, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null } | null, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null }, collaborator: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null, role: UserRole, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null }, product: { __typename?: 'Product', id: string, name: string, description?: string | null, price: number, organizationId: string, productCategoryId: string, supplierId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, productCategory: { __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } }, supplier: { __typename?: 'Supplier', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } } } }> };
 
 export type GetSaleQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1057,14 +1057,14 @@ export type GetSaleQueryVariables = Exact<{
 }>;
 
 
-export type GetSaleQuery = { __typename?: 'Query', sale: { __typename?: 'Sale', id: string, price: number, quantity: number, total: number, paymentMethod: string, paymentStatus: string, paymentDate: any, clientId: string, collaboratorId: string, productId: string, organizationId: string, createdAt: any, updatedAt: any, client: { __typename?: 'Client', id: string, fullName: string, email: string, phone: string, birthDate?: any | null }, collaborator: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null, specialty?: string | null }, product: { __typename?: 'Product', id: string, name: string, description?: string | null, price: number, productCategory: { __typename?: 'ProductCategory', id: string, name: string }, supplier: { __typename?: 'Supplier', id: string, name: string } } } };
+export type GetSaleQuery = { __typename?: 'Query', sale: { __typename?: 'Sale', id: string, price: number, quantity: number, total: number, paymentMethod: string, paymentStatus: string, paymentDate: any, clientId: string, collaboratorId: string, productId: string, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, client: { __typename?: 'Client', id: string, fullName: string, email: string, phone: string, birthDate?: any | null, collaboratorId: string, organizationId: string, createdAt: any, updatedAt: any, collaborator?: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null, role: UserRole, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null } | null, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null }, collaborator: { __typename?: 'Collaborator', id: string, fullName: string, email: string, phone?: string | null, specialty?: string | null, role: UserRole, organizationId: string, createdAt: any, updatedAt: any, organization?: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } | null }, product: { __typename?: 'Product', id: string, name: string, description?: string | null, price: number, organizationId: string, productCategoryId: string, supplierId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, productCategory: { __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } }, supplier: { __typename?: 'Supplier', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } } } } };
 
 export type GetSuppliersQueryVariables = Exact<{
   organizationId: Scalars['ID']['input'];
 }>;
 
 
-export type GetSuppliersQuery = { __typename?: 'Query', suppliers: Array<{ __typename?: 'Supplier', id: string, name: string, description?: string | null, createdAt: any, updatedAt: any, products?: Array<{ __typename?: 'Product', id: string, name: string, price: number }> | null }> };
+export type GetSuppliersQuery = { __typename?: 'Query', suppliers: Array<{ __typename?: 'Supplier', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, products?: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null, price: number, organizationId: string, productCategoryId: string, supplierId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, productCategory: { __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } }, supplier: { __typename?: 'Supplier', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } } }> | null }> };
 
 export type GetSupplierQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1072,7 +1072,7 @@ export type GetSupplierQueryVariables = Exact<{
 }>;
 
 
-export type GetSupplierQuery = { __typename?: 'Query', supplier: { __typename?: 'Supplier', id: string, name: string, description?: string | null, createdAt: any, updatedAt: any, products?: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null, price: number, productCategory: { __typename?: 'ProductCategory', id: string, name: string } }> | null } };
+export type GetSupplierQuery = { __typename?: 'Query', supplier: { __typename?: 'Supplier', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, products?: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null, price: number, organizationId: string, productCategoryId: string, supplierId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any }, productCategory: { __typename?: 'ProductCategory', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } }, supplier: { __typename?: 'Supplier', id: string, name: string, description?: string | null, organizationId: string, createdAt: any, updatedAt: any, organization: { __typename?: 'Organization', id: string, name: string, createdAt: any, updatedAt: any } } }> | null } };
 
 
 export const LoginDocument = gql`
@@ -2273,11 +2273,56 @@ export const GetCategoriesDocument = gql`
     organizationId
     createdAt
     updatedAt
+    organization {
+      id
+      name
+      createdAt
+      updatedAt
+    }
     products {
       id
       name
       description
       price
+      organizationId
+      productCategoryId
+      supplierId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      productCategory {
+        id
+        name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      supplier {
+        id
+        name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
     }
   }
 }
@@ -2319,14 +2364,55 @@ export const GetCategoryDocument = gql`
     organizationId
     createdAt
     updatedAt
+    organization {
+      id
+      name
+      createdAt
+      updatedAt
+    }
     products {
       id
       name
       description
       price
+      organizationId
+      productCategoryId
+      supplierId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      productCategory {
+        id
+        name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
       supplier {
         id
         name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
     }
   }
@@ -2378,10 +2464,23 @@ export const GetClientsDocument = gql`
       id
       fullName
       email
+      phone
+      role
+      organizationId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
     }
     organization {
       id
       name
+      createdAt
+      updatedAt
     }
   }
 }
@@ -2433,10 +2532,22 @@ export const GetClientDocument = gql`
       fullName
       email
       phone
+      role
+      organizationId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
     }
     organization {
       id
       name
+      createdAt
+      updatedAt
     }
   }
 }
@@ -2485,6 +2596,12 @@ export const GetCollaboratorsDocument = gql`
     organizationId
     createdAt
     updatedAt
+    organization {
+      id
+      name
+      createdAt
+      updatedAt
+    }
   }
 }
     `;
@@ -2532,6 +2649,12 @@ export const GetCollaboratorDocument = gql`
     organizationId
     createdAt
     updatedAt
+    organization {
+      id
+      name
+      createdAt
+      updatedAt
+    }
     clients {
       id
       email
@@ -2539,6 +2662,32 @@ export const GetCollaboratorDocument = gql`
       phone
       birthDate
       notes
+      collaboratorId
+      organizationId
+      createdAt
+      updatedAt
+      collaborator {
+        id
+        fullName
+        email
+        phone
+        role
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
     }
   }
 }
@@ -3024,21 +3173,104 @@ export const GetSalesDocument = gql`
     organizationId
     createdAt
     updatedAt
+    organization {
+      id
+      name
+      createdAt
+      updatedAt
+    }
     client {
       id
       fullName
       email
       phone
+      collaboratorId
+      organizationId
+      createdAt
+      updatedAt
+      collaborator {
+        id
+        fullName
+        email
+        phone
+        role
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
     }
     collaborator {
       id
       fullName
       email
+      phone
+      role
+      organizationId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
     }
     product {
       id
       name
+      description
       price
+      organizationId
+      productCategoryId
+      supplierId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      productCategory {
+        id
+        name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      supplier {
+        id
+        name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
     }
   }
 }
@@ -3087,12 +3319,44 @@ export const GetSaleDocument = gql`
     organizationId
     createdAt
     updatedAt
+    organization {
+      id
+      name
+      createdAt
+      updatedAt
+    }
     client {
       id
       fullName
       email
       phone
       birthDate
+      collaboratorId
+      organizationId
+      createdAt
+      updatedAt
+      collaborator {
+        id
+        fullName
+        email
+        phone
+        role
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
     }
     collaborator {
       id
@@ -3100,19 +3364,60 @@ export const GetSaleDocument = gql`
       email
       phone
       specialty
+      role
+      organizationId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
     }
     product {
       id
       name
       description
       price
+      organizationId
+      productCategoryId
+      supplierId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       productCategory {
         id
         name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
       supplier {
         id
         name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
     }
   }
@@ -3153,12 +3458,59 @@ export const GetSuppliersDocument = gql`
     id
     name
     description
+    organizationId
     createdAt
     updatedAt
+    organization {
+      id
+      name
+      createdAt
+      updatedAt
+    }
     products {
       id
       name
+      description
       price
+      organizationId
+      productCategoryId
+      supplierId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      productCategory {
+        id
+        name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      supplier {
+        id
+        name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
     }
   }
 }
@@ -3197,16 +3549,58 @@ export const GetSupplierDocument = gql`
     id
     name
     description
+    organizationId
     createdAt
     updatedAt
+    organization {
+      id
+      name
+      createdAt
+      updatedAt
+    }
     products {
       id
       name
       description
       price
+      organizationId
+      productCategoryId
+      supplierId
+      createdAt
+      updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       productCategory {
         id
         name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      supplier {
+        id
+        name
+        description
+        organizationId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
       }
     }
   }

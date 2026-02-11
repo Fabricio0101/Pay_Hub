@@ -1,8 +1,9 @@
 "use client";
 
-import { useGetSalesHistoryQuery } from "@/graphql/generated/graphql";
+import { useGetSalesHistoryQuery, HistoryGroupBy } from "@/graphql/generated/graphql";
 
-export type HistoryGroupBy = "DAY" | "WEEK" | "MONTH";
+// Re-exportar o enum para facilitar o uso
+export { HistoryGroupBy };
 
 /**
  * Hook customizado para buscar histórico de vendas
@@ -17,7 +18,7 @@ export const useSalesHistory = (
   organizationId: string,
   startDate: string,
   endDate: string,
-  groupBy: HistoryGroupBy = "DAY"
+  groupBy: HistoryGroupBy = HistoryGroupBy.Day
 ) => {
   const shouldSkip = !organizationId || !startDate || !endDate;
   

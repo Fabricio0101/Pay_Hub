@@ -29,7 +29,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group";
-import { useSalesHistory, type HistoryGroupBy } from "@/hooks/use-sales-history";
+import { useSalesHistory, HistoryGroupBy } from "@/hooks/use-sales-history";
 import { formatPrice } from "@/components/sales/table-sales/utils";
 
 export const description = "An interactive area chart";
@@ -60,7 +60,7 @@ export function ChartAreaInteractive() {
   const router = useRouter();
   const isMobile = useIsMobile();
   const [timeRange, setTimeRange] = React.useState("30d");
-  const [groupBy, setGroupBy] = React.useState<HistoryGroupBy>("DAY");
+  const [groupBy, setGroupBy] = React.useState<HistoryGroupBy>(HistoryGroupBy.Day);
   const [organizationId, setOrganizationId] = React.useState<string>("");
 
   React.useEffect(() => {
@@ -90,10 +90,10 @@ export function ChartAreaInteractive() {
   };
 
   const getGroupByFromRange = (range: string): HistoryGroupBy => {
-    if (range === "7d") return "DAY";
-    if (range === "30d") return "DAY";
-    if (range === "90d") return "WEEK";
-    return "DAY";
+    if (range === "7d") return HistoryGroupBy.Day;
+    if (range === "30d") return HistoryGroupBy.Day;
+    if (range === "90d") return HistoryGroupBy.Week;
+    return HistoryGroupBy.Day;
   };
 
   const days = getDaysFromRange(timeRange);

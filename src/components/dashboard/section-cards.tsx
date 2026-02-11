@@ -13,14 +13,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useDashboardStats, type DashboardPeriod } from "@/hooks/use-dashboard-stats";
+import { useDashboardStats, DashboardPeriod } from "@/hooks/use-dashboard-stats";
 import { formatPrice } from "@/components/sales/table-sales/utils";
 
 interface SectionCardsProps {
   period?: DashboardPeriod;
 }
 
-export function SectionCards({ period = "MONTH" }: SectionCardsProps) {
+export function SectionCards({ period = DashboardPeriod.Month }: SectionCardsProps) {
   const router = useRouter();
   const [organizationId, setOrganizationId] = useState<string>("");
 

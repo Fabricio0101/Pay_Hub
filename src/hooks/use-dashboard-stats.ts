@@ -1,8 +1,9 @@
 "use client";
 
-import { useGetDashboardStatsQuery } from "@/graphql/generated/graphql";
+import { useGetDashboardStatsQuery, DashboardPeriod } from "@/graphql/generated/graphql";
 
-export type DashboardPeriod = "TODAY" | "WEEK" | "MONTH" | "QUARTER" | "YEAR" | "ALL_TIME";
+// Re-exportar o enum para facilitar o uso
+export { DashboardPeriod };
 
 /**
  * Hook customizado para buscar estatísticas do dashboard
@@ -13,7 +14,7 @@ export type DashboardPeriod = "TODAY" | "WEEK" | "MONTH" | "QUARTER" | "YEAR" | 
  */
 export const useDashboardStats = (
   organizationId: string,
-  period: DashboardPeriod = "MONTH"
+  period: DashboardPeriod = DashboardPeriod.Month
 ) => {
   const { data, loading, error, refetch } = useGetDashboardStatsQuery({
     variables: {

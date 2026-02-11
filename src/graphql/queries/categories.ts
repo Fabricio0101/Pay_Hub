@@ -12,11 +12,56 @@ export const GET_CATEGORIES = gql`
       organizationId
       createdAt
       updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       products {
         id
         name
         description
         price
+        organizationId
+        productCategoryId
+        supplierId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        productCategory {
+          id
+          name
+          description
+          organizationId
+          createdAt
+          updatedAt
+          organization {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+        }
+        supplier {
+          id
+          name
+          description
+          organizationId
+          createdAt
+          updatedAt
+          organization {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+        }
       }
     }
   }
@@ -34,14 +79,55 @@ export const GET_CATEGORY = gql`
       organizationId
       createdAt
       updatedAt
+      organization {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       products {
         id
         name
         description
         price
+        organizationId
+        productCategoryId
+        supplierId
+        createdAt
+        updatedAt
+        organization {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        productCategory {
+          id
+          name
+          description
+          organizationId
+          createdAt
+          updatedAt
+          organization {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+        }
         supplier {
           id
           name
+          description
+          organizationId
+          createdAt
+          updatedAt
+          organization {
+            id
+            name
+            createdAt
+            updatedAt
+          }
         }
       }
     }
